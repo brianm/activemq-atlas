@@ -36,13 +36,19 @@
         </managementContext>
 
         
-        <networkConnectors>
-            <% 
-                brokers = $deployment.scratch.getAllFor "activemq-broker"
-                for broker in brokers 
-                    %><networkConnector uri="static:(tcp://<%= broker %>:61616)" duplex="true"/><%
-                end
-            %>
+        <% 
+            require 'java'
+            java_import com.ning.atlas.spi.Identity
+
+            space = $deployment.space
+            brokers = $deployment.scratch.getAllFor "activemq-broker"
+            addresses = brokers.map do |broker|
+                id = Identity.value_of broker
+                "tcp://#{space.get(id, "internal-address").value}:61616"
+            end.join ","
+        %>  
+        <networkConnectors>              
+            <networkConnector uri="static:(<%= addresses %>)"/>
         </networkConnectors>
         
 

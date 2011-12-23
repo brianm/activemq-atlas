@@ -15,8 +15,11 @@ environment "ec2" do
 
   base "sec-group", {
     provisioner: ["ec2-security-group:{base.fragment}", {
-                    ssh_from_outside:   "tcp 22 0.0.0.0/0",
-                    activemq_internal:  "tcp 61616 activemq"
+                    ssh_from_anywhere: "tcp 22 0.0.0.0/0",
+                    openwire:          "tcp 61616 activemq",
+                    something_else:    "tcp 56710 activemq",
+                    java_crap:         "tcp 8161 activemq",
+                    java_crap_2:       "tcp 1099 activemq",
                   }]
   }
 
