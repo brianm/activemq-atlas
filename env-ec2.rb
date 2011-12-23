@@ -17,6 +17,8 @@ environment "ec2" do
     provisioner: ["ec2-security-group:{base.fragment}", {
                     ssh_from_anywhere: "tcp 22 0.0.0.0/0",
                     openwire:          "tcp 61616 activemq",
+                    stomp:             "tcp 61612 activemq",
+                    stomp_nio:         "tcp 61613 activemq",
                     something_else:    "tcp 56710 activemq",
                     java_crap:         "tcp 8161 activemq",
                     java_crap_2:       "tcp 1099 activemq",
@@ -28,6 +30,6 @@ environment "ec2" do
       instance_type: "m1.small",
       security_group: "activemq"
     }],
-    init: ["exec:sudo apt-get update", "apt:openjdk-6-jdk"]
+    init: ["exec:sudo apt-get update", "apt:openjdk-6-jdk emacs23-nox"]
   }
 end

@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'stomp'
+<%
+  require 'java'
+    java_import com.ning.atlas.spi.Identity
+
+    space = $deployment.space
+    brokers = $deployment.scratch.getAllFor "activemq-broker"
+    broker_1, broker_2, broker_3 = brokers.map do |broker|
+    	id = Identity.value_of broker
+    	space.get(id, "internal-address").value
+    end
+%>
+client1 = Stomp::Client.new "stomp://<%= broker_1 %>:61612"
+client2 = Stomp::Client.new "stomp://<%= broker_2 %>:61612"
+# client3 = Stomp::Client.new "stomp://<%= broker_3 %>:61612"
+
+client2.subscribe("/queue/smoke_test") do |msg|
+  puts msg.body
+end
+
+client1.publish("/queue/smoke_test", "It seems to work!")
+
+sleep 1
