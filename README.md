@@ -34,3 +34,4 @@ Notes:
 * The brokers are listening for OpenWire on port 61616, Stomp on
   61612, and Stomp+NIO on 61613
 * The best way to restart a broker is <code>sudo service activemq restart</code>
+* The progress bars get confused sometimes, sorry.
