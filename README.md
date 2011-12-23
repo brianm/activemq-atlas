@@ -12,7 +12,7 @@ Java 1.6, so have Java installed, put that executable on your path and
     $ atlas update
     
 It should ask you for your EC2 access credentials (get them
-[here](https://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key). Then
+[here](https://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key)). Then
 it will take a while as it spins up EC2 instances, installs, and wires
 things up. Once it finishes, you can see what is there and ssh into
 instances:
