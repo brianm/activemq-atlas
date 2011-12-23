@@ -29,6 +29,16 @@ message. Run it via
 And you should get a message telling you that it works. Play around
 with it and have fun!
 
+When you are finished playing, you can tear down the servers that were
+set up with:
+
+    $ atlas destroy
+    
+When you want to play again you can go in and start them via
+<code>atlas update</code> again. Do the work from the same directory
+as it stores state (like your AWS access credentials)
+<code>.atlas/</code>.
+
 Notes:
 
 * ActiveMQ is installed under <code>/opt/activemq</code>
