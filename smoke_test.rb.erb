@@ -2,8 +2,9 @@
 
 require 'rubygems'
 require 'stomp'
+require 'thread'
+require 'timeout'
 <%
-  require 'java'
     java_import com.ning.atlas.spi.Identity
 
     space = $deployment.space
@@ -17,10 +18,17 @@ client1 = Stomp::Client.new "stomp://<%= broker_1 %>:61612"
 client2 = Stomp::Client.new "stomp://<%= broker_2 %>:61612"
 # client3 = Stomp::Client.new "stomp://<%= broker_3 %>:61612"
 
-client2.subscribe("/queue/smoke_test") do |msg|
-  puts msg.body
+queue = Queue.new
+
+client1.subscribe("/queue/smoke_test") do |msg|
+  queue << msg.body
 end
 
-client1.publish("/queue/smoke_test", "It seems to work!")
+client2.publish("/queue/smoke_test", "It seems to work!")
 
-sleep 1
+timeout 2 do
+  puts queue.pop
+end
+
+client1.close
+client2.close
