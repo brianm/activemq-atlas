@@ -10,7 +10,7 @@ system "activemq" do
     base: "server",
     install: ["scratch:activemq-broker=@",
               "exec:sudo service activemq stop",
-			        "exec:sudo mkdir -p /opt/activemq/",
+              "exec:sudo mkdir -p /opt/activemq/",
               "tgz:#{download}?to=/opt/activemq/&skiproot=apache-activemq-5.5.1",
               "erb:activemq.xml.erb > /opt/activemq/conf/activemq.xml",
               "exec:sudo ln -s /opt/activemq/bin/activemq /etc/init.d/",
