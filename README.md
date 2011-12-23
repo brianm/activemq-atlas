@@ -4,10 +4,10 @@ brokers.
 
 To use it, first build download
 [the atlas binary](https://atlas-resources.s3.amazonaws.com/atlas) (or
-[check it out and build it](http://github.com/ning/atlas)) and
-set make it executable (<code>chmod +x ./atlas</code>). The binary
-requires Java 1.6, so have Java installed, put that executable on your
-path and <code>cd</code> into your checkout of this project.
+[check it out and build it](http://github.com/ning/atlas)) and make it
+executable (<code>chmod +x ./atlas</code>). The binary requires Java
+1.6, so have Java installed, put that executable on your path and
+<code>cd</code> into your checkout of this project.
 
     $ atlas -e ./env-ec2.rb -s sys-activemq.rb init
     $ atlas update
